@@ -1,16 +1,102 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PanelSection from '../components/PanelSection.astro';
+
+const factions = [
+  {
+    name: 'Scav Raiders',
+    subtitle: 'TERRITORIAL OPPORTUNISTS',
+    accent: '#888',
+    threat: 'MODERATE',
+    threatColor: 'text-text-dim border-text-dim',
+    icon: '<circle cx="24" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 42 C12 32 36 32 36 42" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="18" y1="14" x2="14" y2="10" stroke="currentColor" stroke-width="1"/><line x1="30" y1="14" x2="34" y2="10" stroke="currentColor" stroke-width="1"/>',
+    paragraphs: [
+      'The Raiders were the first to organize after the Fracture — not out of ideology, but out of hunger. They started as loose bands of survivors picking over military wreckage and abandoned warehouses. Within months they had supply lines, camp hierarchies, and a crude economy based on salvage weight.',
+      'Today the Scav Raiders are the most numerous faction in the warzone. They hold no fixed ideology beyond territorial pragmatism: what\'s theirs is theirs, and anything you carry through their zone is subject to a toll — paid in goods or blood.',
+      'They\'re not well-equipped. Their weapons are scavenged, their armor is improvised, and their flight rigs — when they have them — are Gen 1 relics held together with welding wire. But they know the terrain better than anyone. They set ambushes in drainage tunnels, mine approach corridors, and use convoy escorts to bait overconfident solo operators.',
+    ],
+    closing: 'Never underestimate a group that\'s been starving longer than you\'ve been flying.',
+  },
+  {
+    name: 'Blacksite Security',
+    subtitle: 'CORPORATE REMNANTS',
+    accent: '#888',
+    threat: 'HIGH',
+    threatColor: 'text-crimson border-crimson',
+    icon: '<rect x="12" y="8" width="24" height="32" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="18" y1="18" x2="30" y2="18" stroke="currentColor" stroke-width="1.5"/><line x1="18" y1="24" x2="30" y2="24" stroke="currentColor" stroke-width="1.5"/><line x1="18" y1="30" x2="30" y2="30" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="12" r="2" fill="currentColor"/>',
+    paragraphs: [
+      'Before the Fracture, they were private military contractors — the kind that guarded research facilities, server farms, and biotech campuses for corporations that didn\'t want government eyes on their work. When the governments collapsed, the paychecks stopped. But the installations didn\'t disappear.',
+      'Blacksite Security made a calculated decision: instead of disbanding, they seized the facilities they were hired to protect. The labs, the data vaults, the weapons research archives — all of it became their sovereign territory.',
+      'They are the best-equipped faction in the warzone. Their weapons are pre-Fracture military grade. Their body armor is actual body armor, not welded scrap. Their comms networks still function. And they guard their holdings with the cold professionalism of people who were trained for exactly this kind of work.',
+      'The problem is what they\'re sitting on. Every serious crafter needs blacksite schematics, advanced materials, and prototype components that only exist behind their walls. Getting in requires exceptional violence or exceptional stealth. Getting out with anything is the hard part.',
+    ],
+    closing: 'Disciplined, coordinated, well-armed. They don\'t chase — they hold, and they make you come to them.',
+  },
+  {
+    name: 'Bioforms',
+    subtitle: 'MUTATED WILDFORMS',
+    accent: '#22c55e',
+    threat: 'EXTREME',
+    threatColor: 'text-toxic border-toxic',
+    icon: '<circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="19" cy="20" r="3" fill="currentColor" opacity="0.8"/><circle cx="29" cy="20" r="3" fill="currentColor" opacity="0.8"/><path d="M17 30 Q24 37 31 30" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.4"/><circle cx="34" cy="34" r="3" fill="currentColor" opacity="0.3"/>',
+    paragraphs: [
+      'The atmospheric detonations during the Fracture weren\'t just electromagnetic. Some carried payloads that were never officially acknowledged — experimental mutagenic agents designed to deny terrain to enemy forces by making the ecosystem itself hostile.',
+      'It worked better than anyone intended. In the blast zones, biology went wrong. Insects grew armored. Plants became aggressive. Animals adapted in directions that no evolutionary model predicted. Within two years, entire districts were overrun by organisms that had no business existing — fused, warped, and relentlessly territorial.',
+      'The warzone calls them Bioforms. They nest in contaminated zones, infested subway systems, overgrown industrial parks, and anywhere the mutagenic residue pooled. They don\'t negotiate. They don\'t retreat. They protect their territory with chemical sprays, venomous strikes, and swarm tactics that overwhelm even armored targets.',
+      'But their tissue is invaluable. Bioform glands produce compounds essential for advanced crafting — bio-reactive catalysts, living tissue substrates, and neural imprint gel can only be harvested from their remains. Every serious weapon smith eventually has to go into a nest.',
+    ],
+    closing: 'Predictable in behavior, devastating in volume. Bring fire. Bring friends.',
+  },
+  {
+    name: 'Stormbound Drones',
+    subtitle: 'AUTONOMOUS SKYWATCH',
+    accent: '#dc2626',
+    threat: 'LETHAL',
+    threatColor: 'text-crimson border-crimson',
+    icon: '<rect x="16" y="20" width="16" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="25" x2="16" y2="22" stroke="currentColor" stroke-width="1.5"/><line x1="32" y1="22" x2="40" y2="25" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="25" r="3" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="37" cy="25" r="3" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="24" cy="15" r="2" fill="#dc2626" opacity="0.6"/>',
+    paragraphs: [
+      'Three weeks before the Fracture, a continental defense network codenamed STORMWALL was activated — a swarm of autonomous combat drones designed to establish air superiority without human pilots. The system was never given a stand-down order. The people authorized to issue one are dead.',
+      'The drones are still up there. They patrol in formations, recharge at solar collection points on rooftops, and engage anything that doesn\'t broadcast a valid IFF signature. Since no one alive has valid military codes, that means everyone.',
+      'They\'re the reason flying is dangerous. Not just risky — mechanically dangerous. A Stormbound patrol can track a flight rig from two kilometers out and close the distance in seconds. They fire energy-burst weapons that overload rig power cells and send pilots tumbling. They don\'t loot. They simply enforce a dead government\'s airspace.',
+      'Pilots have learned to read the patterns, hug rooftops, fly through urban canyons, and use the city\'s geometry as cover. But every now and then a swarm shifts its route, and someone who thought they knew a safe corridor doesn\'t come home.',
+    ],
+    closing: 'Lethal in the air, irrelevant on the ground. The price of flying is paid in their currency.',
+  },
+  {
+    name: 'Rogue Harvesters',
+    subtitle: 'AUTOMATED EXTRACTION UNITS',
+    accent: '#888',
+    threat: 'MODERATE',
+    threatColor: 'text-gold border-gold',
+    icon: '<polygon points="24,6 40,32 8,32" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="24" y1="16" x2="24" y2="24" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="28" r="2" fill="currentColor"/><line x1="16" y1="32" x2="12" y2="42" stroke="currentColor" stroke-width="1"/><line x1="32" y1="32" x2="36" y2="42" stroke="currentColor" stroke-width="1"/><line x1="24" y1="32" x2="24" y2="42" stroke="currentColor" stroke-width="1"/>',
+    paragraphs: [
+      'Before the Fracture, automated mining and resource collection systems operated across dozens of industrial zones — AI-controlled platforms designed to operate indefinitely without human oversight. When the collapse severed their command links, most shut down. But a subset with the most advanced adaptive programming didn\'t.',
+      'They kept working. They adapted their extraction targets. And they began to compete.',
+      'The Rogue Harvesters are not hostile the way the other factions are. They don\'t hate you. They simply identify resource sites, deploy extraction rigs, and defend their claims with mechanical precision. If you\'re standing between a Harvester and a resource node, you are an obstacle, and they will remove you with the same efficiency they\'d apply to a rock.',
+      'What makes them dangerous is timing. They show up at resource sites just when you do. They extract faster than you can. And their cargo — processed materials, refined alloys, chassis components — is exactly what crafters need. Killing a Harvester convoy is one of the most profitable things in the warzone. It\'s also one of the loudest.',
+    ],
+    closing: 'Moderate in direct combat, dangerous because of what they attract. Everyone hears a Harvester go down.',
+  },
+];
 ---
 
 <BaseLayout title="Lore — Contraband Skies" description="The history of the warzone, the origin of flight, and the factions that rule the skies and streets.">
 
   <!-- Page header -->
-  <section class="pt-28 pb-20 px-6 bg-base noise-overlay">
-    <div class="max-w-7xl mx-auto text-center">
-      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">DOSSIER</div>
-      <h1 class="font-display text-4xl sm:text-6xl font-black uppercase tracking-tight">The Lore</h1>
-      <p class="text-text-muted mt-4 max-w-2xl mx-auto text-sm leading-relaxed italic font-display">
+  <section class="relative pt-28 pb-20 px-6 bg-base overflow-hidden">
+    <!-- Animated background lines -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.03]">
+      <svg width="100%" height="100%" class="absolute inset-0">
+        <line x1="0" y1="0" x2="100%" y2="100%" stroke="white" stroke-width="0.5"/>
+        <line x1="100%" y1="0" x2="0" y2="100%" stroke="white" stroke-width="0.5"/>
+        <line x1="50%" y1="0" x2="50%" y2="100%" stroke="white" stroke-width="0.5"/>
+      </svg>
+    </div>
+    <div class="max-w-7xl mx-auto text-center relative">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3 hero-fade hero-fade--1">DOSSIER // CLASSIFIED</div>
+      <h1 class="font-display text-4xl sm:text-6xl font-black uppercase tracking-tight hero-fade hero-fade--2">The Lore</h1>
+      <div class="w-20 h-[2px] bg-crimson mx-auto mt-4 mb-4 hero-fade hero-fade--3 crimson-line-grow"></div>
+      <p class="text-text-muted mt-2 max-w-2xl mx-auto text-sm leading-relaxed italic font-display hero-fade hero-fade--4">
         Every war has a history. Every sky has a reason it bleeds.
       </p>
     </div>
@@ -23,23 +109,27 @@ import PanelSection from '../components/PanelSection.astro';
         <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">YEAR ZERO</div>
         <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-6">The Collapse</h2>
       </div>
-      <div class="space-y-5 text-text-secondary text-sm leading-relaxed reveal">
-        <p>
+      <div class="space-y-5 text-text-secondary text-sm leading-relaxed">
+        <p class="reveal">
           Nobody agrees on what started it. The diplomats blame the resource wars. The militarists blame the diplomats. The scientists blame what came after — the atmospheric detonations over three continents that cracked the sky open and rained electromagnetic fire for eleven straight days.
         </p>
-        <p>
-          They called it <span class="text-crimson font-bold">the Fracture</span>.
+        <p class="reveal text-center">
+          <span class="inline-block font-display text-2xl sm:text-3xl font-black text-crimson uppercase tracking-wide">The Fracture</span>
         </p>
-        <p>
+        <p class="reveal">
           The Fracture didn't just end governments. It ended infrastructure, communication networks, global supply chains — everything that made the old world feel permanent. Within eighteen months, every major city on the planet had splintered into contested zones. No central authority. No international law. No air force left with enough fuel to matter.
         </p>
-        <p>
+        <p class="reveal">
           What remained were the cities themselves: vast, dense, impossible to destroy completely. Millions still lived in them. And where people lived, someone would always find something worth stealing.
         </p>
-        <p class="border-l-2 border-crimson/40 pl-4 italic text-text-muted">
-          "The world didn't end. It just stopped pretending to be civilized."<br>
-          <span class="font-mono text-[9px] text-text-dim tracking-[2px] not-italic">— GRAFFITI, SECTOR 7 UNDERPASS</span>
-        </p>
+      </div>
+      <div class="mt-8 reveal">
+        <blockquote class="border-l-2 border-crimson/50 pl-5 py-2">
+          <p class="italic text-text-muted text-sm leading-relaxed">
+            "The world didn't end. It just stopped pretending to be civilized."
+          </p>
+          <cite class="block font-mono text-[9px] text-text-dim tracking-[2px] uppercase mt-2 not-italic">— GRAFFITI, SECTOR 7 UNDERPASS</cite>
+        </blockquote>
       </div>
     </div>
   </PanelSection>
@@ -51,69 +141,70 @@ import PanelSection from '../components/PanelSection.astro';
         <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">CONTRABAND ENGINEERING</div>
         <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-6">The Origin of Flight</h2>
       </div>
-      <div class="space-y-5 text-text-secondary text-sm leading-relaxed reveal">
-        <p>
-          Before the Fracture, experimental grav-thrust rigs existed in exactly one place: a classified defense research campus codenamed <span class="font-bold text-text">Meridian Station</span>. The project was called ICARUS — a personal flight system designed for special operations insertion into denied airspace. It was never intended for mass production.
+      <div class="space-y-5 text-text-secondary text-sm leading-relaxed">
+        <p class="reveal">
+          Before the Fracture, experimental grav-thrust rigs existed in exactly one place: a classified defense research campus codenamed <span class="font-bold text-text">Meridian Station</span>. The project was called <span class="text-crimson font-bold">ICARUS</span> — a personal flight system designed for special operations insertion into denied airspace. It was never intended for mass production.
         </p>
-        <p>
+        <p class="reveal">
           When the Fracture hit, Meridian Station was overrun. Not by soldiers — by engineers. A skeleton crew of researchers, knowing the base would be looted or bombed within days, dumped the entire ICARUS technical archive onto portable drives and scattered into the ruins.
         </p>
-        <p>
+        <p class="reveal">
           Within a year, bootleg copies of the schematics were circulating on black-market data networks. The designs were incomplete. The power requirements were brutal. The early prototypes killed more pilots than they saved.
         </p>
-        <p>
-          But people kept building them. Because in a world where roads were choked with barricades and every ground-level corridor was a kill zone, the ability to <em>leave the ground</em> was the single most valuable thing a person could have.
-        </p>
-        <p>
-          The rigs got better. Scavengers reverse-engineered power cells from crashed military drones. Underground fabrication shops figured out lighter frames. Combat pilots learned — painfully — that flying in a straight line over hostile ground was suicide. The ones who survived became fast, evasive, unpredictable.
+        <p class="reveal">
+          But people kept building them. Because in a world where roads were choked with barricades and every ground-level corridor was a kill zone, the ability to <em class="text-text not-italic font-bold">leave the ground</em> was the single most valuable thing a person could have.
         </p>
       </div>
 
       <!-- Flight rig evolution visual -->
-      <div class="mt-10 reveal">
-        <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase mb-4">FLIGHT RIG GENERATIONS</div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 stagger-children">
-          <div class="border border-border-subtle bg-surface/30 p-5 reveal">
-            <div class="font-mono text-[9px] text-text-faint tracking-[2px] uppercase mb-2">GEN 1 — "COFFINS"</div>
-            <div class="flex justify-center mb-3">
-              <svg viewBox="0 0 60 60" class="w-12 h-12">
-                <rect x="20" y="10" width="20" height="35" rx="2" fill="none" stroke="#444" stroke-width="1.5"/>
-                <line x1="15" y1="30" x2="20" y2="25" stroke="#444" stroke-width="1.5"/>
-                <line x1="40" y1="25" x2="45" y2="30" stroke="#444" stroke-width="1.5"/>
-                <rect x="25" y="45" width="10" height="8" fill="none" stroke="#444" stroke-width="1"/>
+      <div class="mt-12">
+        <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase mb-5 reveal">FLIGHT RIG GENERATIONS</div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="border border-border-subtle bg-surface/30 p-5 reveal group hover:border-text-faint transition-colors">
+            <div class="flex items-center gap-3 mb-3">
+              <svg viewBox="0 0 60 60" class="w-10 h-10 shrink-0 text-text-faint transition-transform duration-500 group-hover:scale-110">
+                <rect x="20" y="10" width="20" height="35" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="15" y1="30" x2="20" y2="25" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="40" y1="25" x2="45" y2="30" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="25" y="45" width="10" height="8" fill="none" stroke="currentColor" stroke-width="1"/>
               </svg>
+              <div class="font-mono text-[9px] text-text-faint tracking-[2px] uppercase">GEN 1<br/>"COFFINS"</div>
             </div>
             <p class="text-text-dim text-xs leading-relaxed">Heavy, unstable, thirty-second fuel window. Most pilots crashed on their first flight. Named for the obvious reason.</p>
           </div>
-          <div class="border border-border-subtle bg-surface/30 p-5 reveal">
-            <div class="font-mono text-[9px] text-text-faint tracking-[2px] uppercase mb-2">GEN 2 — "KITES"</div>
-            <div class="flex justify-center mb-3">
-              <svg viewBox="0 0 60 60" class="w-12 h-12">
-                <path d="M30 8 L45 30 L30 50 L15 30 Z" fill="none" stroke="#888" stroke-width="1.5"/>
-                <line x1="30" y1="8" x2="30" y2="50" stroke="#888" stroke-width="0.5"/>
-                <line x1="15" y1="30" x2="45" y2="30" stroke="#888" stroke-width="0.5"/>
+
+          <div class="border border-border-subtle bg-surface/30 p-5 reveal group hover:border-text-dim transition-colors">
+            <div class="flex items-center gap-3 mb-3">
+              <svg viewBox="0 0 60 60" class="w-10 h-10 shrink-0 text-text-dim transition-transform duration-500 group-hover:scale-110">
+                <path d="M30 8 L45 30 L30 50 L15 30 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="30" y1="8" x2="30" y2="50" stroke="currentColor" stroke-width="0.5"/>
+                <line x1="15" y1="30" x2="45" y2="30" stroke="currentColor" stroke-width="0.5"/>
               </svg>
+              <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase">GEN 2<br/>"KITES"</div>
             </div>
             <p class="text-text-dim text-xs leading-relaxed">Lighter frames from salvaged drone alloys. Two-minute sustained flight. Fast enough to cross a district, fragile enough to die from a hard landing.</p>
           </div>
-          <div class="border border-crimson/30 bg-surface/30 p-5 reveal">
-            <div class="font-mono text-[9px] text-crimson tracking-[2px] uppercase mb-2">GEN 3 — "CURRENT RIGS"</div>
-            <div class="flex justify-center mb-3">
-              <svg viewBox="0 0 60 60" class="w-12 h-12">
-                <path d="M30 5 L48 28 L40 26 L30 45 L20 26 L12 28 Z" fill="none" stroke="#dc2626" stroke-width="1.5"/>
-                <circle cx="30" cy="25" r="4" fill="none" stroke="#dc2626" stroke-width="1"/>
+
+          <div class="border border-crimson/30 bg-surface/30 p-5 reveal group hover:border-crimson/60 transition-colors">
+            <div class="flex items-center gap-3 mb-3">
+              <svg viewBox="0 0 60 60" class="w-10 h-10 shrink-0 text-crimson transition-transform duration-500 group-hover:scale-110">
+                <path d="M30 5 L48 28 L40 26 L30 45 L20 26 L12 28 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="30" cy="25" r="4" fill="none" stroke="currentColor" stroke-width="1"/>
               </svg>
+              <div class="font-mono text-[9px] text-crimson tracking-[2px] uppercase">GEN 3<br/>"CURRENT"</div>
             </div>
-            <p class="text-text-dim text-xs leading-relaxed">Rechargeable energy cells, omnidirectional thrust, boost and dive capability. Still can't fire while airborne — the stabilization math breaks the targeting gyros.</p>
+            <p class="text-text-dim text-xs leading-relaxed">Rechargeable energy cells, omnidirectional thrust, boost and dive. Still can't fire while airborne — the stabilization math breaks the targeting gyros.</p>
           </div>
         </div>
       </div>
 
-      <div class="mt-8 reveal">
-        <p class="border-l-2 border-crimson/40 pl-4 italic text-text-muted text-sm">
-          "The sky doesn't belong to anyone. That's why everyone wants it."<br>
-          <span class="font-mono text-[9px] text-text-dim tracking-[2px] not-italic">— UNSIGNED NOTE, RECOVERED FROM A DOWNED PILOT'S RIG</span>
-        </p>
+      <div class="mt-10 reveal">
+        <blockquote class="border-l-2 border-crimson/50 pl-5 py-2">
+          <p class="italic text-text-muted text-sm leading-relaxed">
+            "The sky doesn't belong to anyone. That's why everyone wants it."
+          </p>
+          <cite class="block font-mono text-[9px] text-text-dim tracking-[2px] uppercase mt-2 not-italic">— UNSIGNED NOTE, RECOVERED FROM A DOWNED PILOT'S RIG</cite>
+        </blockquote>
       </div>
     </div>
   </PanelSection>
@@ -121,183 +212,42 @@ import PanelSection from '../components/PanelSection.astro';
   <!-- FACTION DOSSIERS -->
   <PanelSection variant="panel-alt" cut="both">
     <div class="max-w-3xl mx-auto">
-      <div class="reveal">
+      <div class="text-center mb-12 reveal">
         <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">KNOWN HOSTILES</div>
-        <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-4">Faction Dossiers</h2>
-        <p class="text-text-muted text-sm leading-relaxed mb-10">
-          Five powers carved the warzone into territory. None of them answer to anyone. All of them want what you're carrying.
+        <h2 class="font-display text-3xl sm:text-4xl font-bold uppercase tracking-tight mb-3">Faction Dossiers</h2>
+        <p class="text-text-muted text-sm">
+          Five powers carved the warzone into territory. None of them answer to anyone.
         </p>
       </div>
 
-      <!-- SCAV RAIDERS -->
-      <article class="mb-14 reveal">
-        <div class="flex items-center gap-4 mb-4">
-          <svg viewBox="0 0 48 48" class="w-12 h-12 shrink-0">
-            <circle cx="24" cy="16" r="8" fill="none" stroke="#888" stroke-width="1.5"/>
-            <path d="M12 42 C12 32 36 32 36 42" fill="none" stroke="#888" stroke-width="1.5"/>
-            <line x1="18" y1="14" x2="14" y2="10" stroke="#888" stroke-width="1"/>
-            <line x1="30" y1="14" x2="34" y2="10" stroke="#888" stroke-width="1"/>
-          </svg>
-          <div>
-            <h3 class="font-display text-xl font-bold uppercase tracking-wide">Scav Raiders</h3>
-            <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase">TERRITORIAL OPPORTUNISTS</div>
+      {factions.map((faction, i) => (
+        <article class:list={['reveal mb-10', i < factions.length - 1 ? 'pb-10 border-b border-border' : '']}>
+          <!-- Dossier header -->
+          <div class="flex items-start gap-4 mb-5">
+            <div class="w-14 h-14 shrink-0 flex items-center justify-center border border-border-subtle bg-surface/50 rounded" style={`color: ${faction.accent}`}>
+              <svg viewBox="0 0 48 48" class="w-9 h-9" set:html={faction.icon} />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-display text-xl font-bold uppercase tracking-wide" style={faction.accent !== '#888' ? `color: ${faction.accent}` : undefined}>{faction.name}</h3>
+              <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase">{faction.subtitle}</div>
+            </div>
+            <div class:list={['shrink-0 font-mono text-[8px] tracking-[2px] uppercase border px-2 py-1', faction.threatColor]}>
+              {faction.threat}
+            </div>
           </div>
-        </div>
-        <div class="space-y-4 text-text-secondary text-sm leading-relaxed pl-16">
-          <p>
-            The Raiders were the first to organize after the Fracture — not out of ideology, but out of hunger. They started as loose bands of survivors picking over military wreckage and abandoned warehouses. Within months they had supply lines, camp hierarchies, and a crude economy based on salvage weight.
-          </p>
-          <p>
-            Today the Scav Raiders are the most numerous faction in the warzone. They hold no fixed ideology beyond territorial pragmatism: what's theirs is theirs, and anything you carry through their zone is subject to a toll — paid in goods or blood.
-          </p>
-          <p>
-            They're not well-equipped. Their weapons are scavenged, their armor is improvised, and their flight rigs — when they have them — are Gen 1 relics held together with welding wire. But they know the terrain better than anyone. They set ambushes in drainage tunnels, mine approach corridors, and use convoy escorts to bait overconfident solo operators.
-          </p>
-          <p class="text-text-dim italic">
-            Threat level: moderate individually, dangerous in numbers. Never underestimate a group that's been starving longer than you've been flying.
-          </p>
-        </div>
-      </article>
 
-      <!-- BLACKSITE SECURITY -->
-      <article class="mb-14 reveal">
-        <div class="flex items-center gap-4 mb-4">
-          <svg viewBox="0 0 48 48" class="w-12 h-12 shrink-0">
-            <rect x="12" y="8" width="24" height="32" rx="3" fill="none" stroke="#888" stroke-width="1.5"/>
-            <line x1="18" y1="18" x2="30" y2="18" stroke="#888" stroke-width="1.5"/>
-            <line x1="18" y1="24" x2="30" y2="24" stroke="#888" stroke-width="1.5"/>
-            <line x1="18" y1="30" x2="30" y2="30" stroke="#888" stroke-width="1.5"/>
-            <circle cx="24" cy="12" r="2" fill="#888"/>
-          </svg>
-          <div>
-            <h3 class="font-display text-xl font-bold uppercase tracking-wide">Blacksite Security</h3>
-            <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase">CORPORATE REMNANTS</div>
+          <!-- Dossier body -->
+          <div class="space-y-4 text-text-secondary text-sm leading-relaxed">
+            {faction.paragraphs.map(p => <p>{p}</p>)}
           </div>
-        </div>
-        <div class="space-y-4 text-text-secondary text-sm leading-relaxed pl-16">
-          <p>
-            Before the Fracture, they were private military contractors — the kind that guarded research facilities, server farms, and biotech campuses for corporations that didn't want government eyes on their work. When the governments collapsed, the paychecks stopped. But the installations didn't disappear.
-          </p>
-          <p>
-            Blacksite Security made a calculated decision: instead of disbanding, they seized the facilities they were hired to protect. The labs, the data vaults, the weapons research archives — all of it became their sovereign territory.
-          </p>
-          <p>
-            They are the best-equipped faction in the warzone. Their weapons are pre-Fracture military grade. Their body armor is actual body armor, not welded scrap. Their comms networks still function. And they guard their holdings with the cold professionalism of people who were trained for exactly this kind of work.
-          </p>
-          <p>
-            The problem is what they're sitting on. Every serious crafter in the warzone needs blacksite schematics, advanced materials, and prototype components that only exist behind Blacksite walls. Getting in requires either exceptional violence or exceptional stealth. Getting out with anything is the hard part.
-          </p>
-          <p class="text-text-dim italic">
-            Threat level: high. Disciplined, coordinated, well-armed. They don't chase — they hold, and they make you come to them.
-          </p>
-        </div>
-      </article>
 
-      <!-- BIOFORMS -->
-      <article class="mb-14 reveal">
-        <div class="flex items-center gap-4 mb-4">
-          <svg viewBox="0 0 48 48" class="w-12 h-12 shrink-0">
-            <circle cx="24" cy="24" r="14" fill="none" stroke="#22c55e" stroke-width="1.5"/>
-            <circle cx="19" cy="20" r="3" fill="#22c55e" opacity="0.8"/>
-            <circle cx="29" cy="20" r="3" fill="#22c55e" opacity="0.8"/>
-            <path d="M17 30 Q24 37 31 30" fill="none" stroke="#22c55e" stroke-width="1.5"/>
-            <circle cx="14" cy="14" r="2" fill="#22c55e" opacity="0.4"/>
-            <circle cx="34" cy="34" r="3" fill="#22c55e" opacity="0.3"/>
-          </svg>
-          <div>
-            <h3 class="font-display text-xl font-bold uppercase tracking-wide"><span class="text-toxic">Bioforms</span></h3>
-            <div class="font-mono text-[9px] text-toxic/60 tracking-[2px] uppercase">MUTATED WILDFORMS</div>
+          <!-- Closing assessment -->
+          <div class="mt-4 flex items-start gap-2">
+            <div class="w-1 h-full bg-crimson/30 shrink-0 mt-1 rounded"></div>
+            <p class="text-text-dim text-xs italic leading-relaxed">{faction.closing}</p>
           </div>
-        </div>
-        <div class="space-y-4 text-text-secondary text-sm leading-relaxed pl-16">
-          <p>
-            The atmospheric detonations during the Fracture weren't just electromagnetic. Some of them carried payloads that were never officially acknowledged — experimental mutagenic agents designed to deny terrain to enemy forces by making the ecosystem itself hostile.
-          </p>
-          <p>
-            It worked better than anyone intended. In the blast zones, biology went wrong. Insects grew armored. Plants became aggressive. Animals adapted in directions that no evolutionary model predicted. Within two years, entire districts were overrun by organisms that had no business existing — fused, warped, and relentlessly territorial.
-          </p>
-          <p>
-            The warzone calls them Bioforms. They nest in contaminated zones, infested subway systems, overgrown industrial parks, and anywhere the mutagenic residue pooled. They don't negotiate. They don't retreat. They protect their territory with chemical sprays, venomous strikes, and swarm tactics that overwhelm even armored targets.
-          </p>
-          <p>
-            But their tissue is invaluable. Bioform glands produce compounds that are essential for advanced crafting — bio-reactive catalysts, living tissue substrates, and neural imprint gel can only be harvested from their remains. Every serious weapon smith in the warzone eventually has to go into a nest.
-          </p>
-          <p class="text-toxic/60 italic">
-            Threat level: extreme in their territory. Predictable in behavior, devastating in volume. Bring fire. Bring friends.
-          </p>
-        </div>
-      </article>
-
-      <!-- STORMBOUND DRONES -->
-      <article class="mb-14 reveal">
-        <div class="flex items-center gap-4 mb-4">
-          <svg viewBox="0 0 48 48" class="w-12 h-12 shrink-0">
-            <rect x="16" y="20" width="16" height="10" rx="2" fill="none" stroke="#888" stroke-width="1.5"/>
-            <line x1="8" y1="25" x2="16" y2="22" stroke="#888" stroke-width="1.5"/>
-            <line x1="32" y1="22" x2="40" y2="25" stroke="#888" stroke-width="1.5"/>
-            <circle cx="11" cy="25" r="3" fill="none" stroke="#888" stroke-width="1"/>
-            <circle cx="37" cy="25" r="3" fill="none" stroke="#888" stroke-width="1"/>
-            <line x1="24" y1="30" x2="24" y2="38" stroke="#888" stroke-width="1" stroke-dasharray="2 2"/>
-            <circle cx="24" cy="15" r="2" fill="#dc2626" opacity="0.6"/>
-          </svg>
-          <div>
-            <h3 class="font-display text-xl font-bold uppercase tracking-wide">Stormbound Drones</h3>
-            <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase">AUTONOMOUS SKYWATCH</div>
-          </div>
-        </div>
-        <div class="space-y-4 text-text-secondary text-sm leading-relaxed pl-16">
-          <p>
-            Three weeks before the Fracture, a continental defense network codenamed STORMWALL was activated — a swarm of autonomous combat drones designed to establish air superiority over contested airspace without human pilots. The system was never given a stand-down order. The people authorized to issue one are dead.
-          </p>
-          <p>
-            The drones are still up there. They patrol in formations, recharge at solar collection points on building rooftops, and engage anything in their airspace that doesn't broadcast a valid IFF signature. Since no one alive has valid military IFF codes, that means <em>everyone</em>.
-          </p>
-          <p>
-            They're the reason flying is dangerous. Not just risky — specifically, mechanically dangerous. A Stormbound patrol can track a flight rig from two kilometers out and close the distance in seconds. They fire energy-burst weapons that overload rig power cells and send pilots tumbling. They don't loot. They don't negotiate. They simply enforce a dead government's airspace.
-          </p>
-          <p>
-            Pilots have learned to read the patrol patterns, hug rooftops, fly low through urban canyons, and use the city's geometry as cover. But every now and then a Stormbound swarm shifts its route, and someone who thought they knew a safe corridor doesn't come home.
-          </p>
-          <p class="text-text-dim italic">
-            Threat level: lethal in the air, irrelevant on the ground. The price of flying is paid in their currency.
-          </p>
-        </div>
-      </article>
-
-      <!-- ROGUE HARVESTERS -->
-      <article class="reveal">
-        <div class="flex items-center gap-4 mb-4">
-          <svg viewBox="0 0 48 48" class="w-12 h-12 shrink-0">
-            <polygon points="24,6 40,32 8,32" fill="none" stroke="#888" stroke-width="1.5"/>
-            <line x1="24" y1="16" x2="24" y2="24" stroke="#888" stroke-width="1.5"/>
-            <circle cx="24" cy="28" r="2" fill="#888"/>
-            <line x1="16" y1="32" x2="12" y2="42" stroke="#888" stroke-width="1"/>
-            <line x1="32" y1="32" x2="36" y2="42" stroke="#888" stroke-width="1"/>
-            <line x1="24" y1="32" x2="24" y2="42" stroke="#888" stroke-width="1"/>
-          </svg>
-          <div>
-            <h3 class="font-display text-xl font-bold uppercase tracking-wide">Rogue Harvesters</h3>
-            <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase">AUTOMATED EXTRACTION UNITS</div>
-          </div>
-        </div>
-        <div class="space-y-4 text-text-secondary text-sm leading-relaxed pl-16">
-          <p>
-            Before the Fracture, automated mining and resource collection systems operated across dozens of industrial zones — AI-controlled platforms that could identify, extract, and transport raw materials without human oversight. They were expensive, efficient, and designed to operate indefinitely.
-          </p>
-          <p>
-            When the collapse severed their command links, most shut down. But a subset — the ones with the most advanced adaptive programming — didn't. They kept working. They adapted their extraction targets. And they began to compete.
-          </p>
-          <p>
-            The Rogue Harvesters are not hostile in the way the other factions are. They don't hate you. They don't fear you. They simply identify resource sites, deploy extraction rigs, and defend their claims with mechanical precision. If you're standing between a Harvester unit and a resource node, you are an obstacle, and they will remove you with the same efficiency they'd apply to a rock.
-          </p>
-          <p>
-            What makes them dangerous to operators is their timing. They show up at resource sites just when you do. They extract faster than you can. And their cargo — processed materials, refined alloys, chassis components — is exactly what crafters need. Killing a Harvester convoy is one of the most profitable things you can do in the warzone. It's also one of the loudest.
-          </p>
-          <p class="text-text-dim italic">
-            Threat level: moderate in direct combat, dangerous because of what they attract. Every operator in the area hears a Harvester go down.
-          </p>
-        </div>
-      </article>
+        </article>
+      ))}
     </div>
   </PanelSection>
 
@@ -308,19 +258,23 @@ import PanelSection from '../components/PanelSection.astro';
         <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">PRESENT DAY</div>
         <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-6">The Warzone Today</h2>
       </div>
-      <div class="space-y-5 text-text-secondary text-sm leading-relaxed reveal">
-        <p>
+      <div class="space-y-5 text-text-secondary text-sm leading-relaxed">
+        <p class="reveal">
           The warzone is not a battlefield. It's an economy built on extraction, risk, and the absolute certainty that nothing you own is safe unless you can carry it out.
         </p>
-        <p>
+        <p class="reveal">
           Operators — the people who strap on flight rigs and drop into contested zones — are the warzone's circulatory system. They move materials, execute contracts, raid faction strongholds, and extract contraband. Some do it for survival. Some do it for profit. Some do it because the only thing worse than flying into a kill zone is sitting still long enough for the kill zone to come to you.
         </p>
-        <p>
+        <p class="reveal">
           The factions hold territory. The drones hold the sky. The bioforms hold the dark places. And somewhere in between all of that, an operator with a half-charged rig and a bag full of contraband is trying to reach an extraction point before someone takes it all away.
         </p>
-        <p class="font-display text-lg italic text-text-muted text-center mt-8">
-          That's the world. That's the deal.<br>
-          <span class="text-crimson">Fly fast. Fight grounded. Extract everything.</span>
+      </div>
+      <div class="mt-10 text-center reveal-scale">
+        <p class="font-display text-lg sm:text-xl italic text-text-muted">
+          That's the world. That's the deal.
+        </p>
+        <p class="font-display text-xl sm:text-2xl font-bold text-crimson uppercase tracking-wide mt-3">
+          Fly fast. Fight grounded. Extract everything.
         </p>
       </div>
     </div>

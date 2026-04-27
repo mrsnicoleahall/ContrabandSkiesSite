@@ -12,20 +12,61 @@ const bgColor = {
   'panel-alt': 'bg-panel-alt',
   base: 'bg-base',
 }[variant];
-
-const clipPath = {
-  top: 'polygon(0 4%, 100% 0, 100% 100%, 0 100%)',
-  bottom: 'polygon(0 0, 100% 0, 100% 96%, 0 100%)',
-  both: 'polygon(0 4%, 100% 0, 100% 96%, 0 100%)',
-  none: 'none',
-}[cut];
 ---
 
 <section
-  class:list={['relative py-24 px-6 noise-overlay', bgColor, className]}
-  style={clipPath !== 'none' ? `clip-path: ${clipPath}; margin-top: -2rem; padding-top: 4rem; margin-bottom: -2rem; padding-bottom: 4rem;` : undefined}
+  class:list={[
+    'relative py-24 px-6 noise-overlay',
+    bgColor,
+    cut === 'top' ? 'panel-cut-top' : '',
+    cut === 'bottom' ? 'panel-cut-bottom' : '',
+    cut === 'both' ? 'panel-cut-both' : '',
+    className,
+  ]}
 >
   <div class="max-w-7xl mx-auto reveal">
     <slot />
   </div>
 </section>
+
+<style>
+  /* Desktop: aggressive diagonal cuts */
+  .panel-cut-top {
+    clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
+    margin-top: -1.5rem;
+    padding-top: 3.5rem;
+  }
+  .panel-cut-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
+    margin-bottom: -1.5rem;
+    padding-bottom: 3.5rem;
+  }
+  .panel-cut-both {
+    clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%);
+    margin-top: -1.5rem;
+    padding-top: 3.5rem;
+    margin-bottom: -1.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  /* Mobile: softer cuts so content doesn't get clipped */
+  @media (max-width: 767px) {
+    .panel-cut-top {
+      clip-path: polygon(0 1.5%, 100% 0, 100% 100%, 0 100%);
+      margin-top: -0.75rem;
+      padding-top: 2.5rem;
+    }
+    .panel-cut-bottom {
+      clip-path: polygon(0 0, 100% 0, 100% 98.5%, 0 100%);
+      margin-bottom: -0.75rem;
+      padding-bottom: 2.5rem;
+    }
+    .panel-cut-both {
+      clip-path: polygon(0 1.5%, 100% 0, 100% 98.5%, 0 100%);
+      margin-top: -0.75rem;
+      padding-top: 2.5rem;
+      margin-bottom: -0.75rem;
+      padding-bottom: 2.5rem;
+    }
+  }
+</style>
