@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PanelSection from '../components/PanelSection.astro';
+import MapCard from '../components/MapCard.astro';
+import FactionCard from '../components/FactionCard.astro';
+---
+
+<BaseLayout title="World — Contraband Skies" description="Three distinct maps, five hostile factions, and a world that doesn't wait for you.">
+
+  <!-- Page header -->
+  <section class="pt-28 pb-16 px-6 bg-base noise-overlay">
+    <div class="max-w-7xl mx-auto text-center">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">THE WARZONE</div>
+      <h1 class="font-display text-4xl sm:text-6xl font-black uppercase tracking-tight">The World</h1>
+      <p class="text-text-muted mt-4 max-w-lg mx-auto text-sm">Three distinct maps. Same noir grammar. Different combat rhythm.</p>
+    </div>
+  </section>
+
+  <!-- MAPS -->
+  <PanelSection variant="panel-alt" cut="top">
+    <div class="font-mono text-[10px] text-text-dim tracking-[4px] uppercase mb-8 reveal">THEATRES OF OPERATION</div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="reveal">
+        <MapCard
+          name="Urban"
+          description="Dense city core. Towers, alleys, elevated rail, neon avenues, plazas, and warehouses. Vertical combat at its most intense — rooftops become both refuge and killing ground."
+          callout="Strongest vertical escape play and rooftop ambush potential"
+          accent="gold"
+          landmarks={['Rooftops', 'Alleys', 'Elevated Rail', 'Neon Avenues', 'Towers', 'Warehouses']}
+          mapArt='<svg viewBox="0 0 200 100" class="w-full h-24"><g fill="none" stroke="#d4a017" stroke-width="0.5" opacity="0.6"><rect x="10" y="30" width="20" height="70"/><rect x="35" y="15" width="30" height="85"/><rect x="70" y="40" width="15" height="60"/><rect x="90" y="10" width="25" height="90"/><rect x="120" y="35" width="20" height="65"/><rect x="145" y="20" width="35" height="80"/><line x1="0" y1="98" x2="200" y2="98"/></g></svg>'
+        />
+      </div>
+      <div class="reveal">
+        <MapCard
+          name="Rural"
+          description="Open farmland, ridgelines, creek beds, timber edges, mills, and quarries. Longer sightlines mean more exposure during flight and stronger marksman pressure on the ground."
+          callout="Punishes exposed movement"
+          accent="crimson"
+          landmarks={['Ridgelines', 'Creek Beds', 'Timber Edges', 'Mills', 'Quarries', 'Farmland']}
+          mapArt='<svg viewBox="0 0 200 100" class="w-full h-24"><g fill="none" stroke="#dc2626" stroke-width="0.5" opacity="0.6"><path d="M0,70 Q50,40 100,65 T200,55"/><path d="M0,80 Q60,60 120,75 T200,70"/><line x1="40" y1="45" x2="40" y2="70"/><line x1="42" y1="45" x2="48" y2="55"/><line x1="38" y1="45" x2="32" y2="55"/><line x1="140" y1="55" x2="140" y2="72"/><line x1="142" y1="55" x2="148" y2="63"/><line x1="138" y1="55" x2="132" y2="63"/><line x1="0" y1="98" x2="200" y2="98"/></g></svg>'
+        />
+      </div>
+      <div class="reveal">
+        <MapCard
+          name="Suburbs"
+          description="Housing blocks, school zones, strip malls, drainage channels, cul-de-sacs, and backyard routes. Medium sightlines with endless flanking lanes for house-to-house pressure."
+          callout="Ambushes, lane control, house-to-house gunfights"
+          accent="crimson"
+          landmarks={['Housing Blocks', 'Strip Malls', 'Drainage Channels', 'Cul-de-sacs', 'School Zones', 'Backyard Routes']}
+          mapArt='<svg viewBox="0 0 200 100" class="w-full h-24"><g fill="none" stroke="#999" stroke-width="0.5" opacity="0.6"><rect x="15" y="55" width="25" height="20"/><polygon points="15,55 27,42 40,55"/><rect x="55" y="50" width="30" height="25"/><polygon points="55,50 70,38 85,50"/><rect x="100" y="55" width="20" height="20"/><polygon points="100,55 110,44 120,55"/><rect x="135" y="48" width="35" height="27"/><polygon points="135,48 152,36 170,48"/><line x1="0" y1="98" x2="200" y2="98"/></g></svg>'
+        />
+      </div>
+    </div>
+  </PanelSection>
+
+  <!-- FACTIONS -->
+  <PanelSection variant="panel" cut="both">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">HOSTILES</div>
+      <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-2">PvE Factions</h2>
+      <p class="text-text-muted text-sm leading-relaxed mb-8 max-w-2xl">
+        The world is not empty between players. Five factions control territory, guard resources, and hunt anyone who enters their domain.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+      <FactionCard
+        name="Scav Raiders"
+        role="Baseline armed roamers. Camp defenders, convoy escorts, and opportunistic hunters."
+        icon='<svg viewBox="0 0 40 40" class="w-10 h-10"><circle cx="20" cy="14" r="6" fill="none" stroke="#888" stroke-width="1.5"/><path d="M10 34 C10 26 30 26 30 34" fill="none" stroke="#888" stroke-width="1.5"/></svg>'
+      />
+      <FactionCard
+        name="Blacksite Security"
+        role="Tougher tech guardians. They defend research zones and high-value installations."
+        icon='<svg viewBox="0 0 40 40" class="w-10 h-10"><rect x="10" y="8" width="20" height="24" rx="2" fill="none" stroke="#888" stroke-width="1.5"/><line x1="15" y1="16" x2="25" y2="16" stroke="#888" stroke-width="1.5"/><line x1="15" y1="22" x2="25" y2="22" stroke="#888" stroke-width="1.5"/></svg>'
+      />
+      <FactionCard
+        name="Bioforms"
+        role="Mutated organic threats. Source of rare biochemical crafting components."
+        accent="toxic"
+        icon='<svg viewBox="0 0 40 40" class="w-10 h-10"><circle cx="20" cy="20" r="10" fill="none" stroke="#22c55e" stroke-width="1.5"/><circle cx="16" cy="17" r="2" fill="#22c55e"/><circle cx="24" cy="17" r="2" fill="#22c55e"/><path d="M14 25 Q20 30 26 25" fill="none" stroke="#22c55e" stroke-width="1.5"/></svg>'
+      />
+      <FactionCard
+        name="Stormbound Drones"
+        role="Airborne machine patrols. They own dangerous skies and make flight costly in their territory."
+        icon='<svg viewBox="0 0 40 40" class="w-10 h-10"><rect x="14" y="16" width="12" height="8" rx="1" fill="none" stroke="#888" stroke-width="1.5"/><line x1="8" y1="20" x2="14" y2="18" stroke="#888" stroke-width="1.5"/><line x1="26" y1="18" x2="32" y2="20" stroke="#888" stroke-width="1.5"/><circle cx="10" cy="20" r="2" fill="none" stroke="#888" stroke-width="1"/><circle cx="30" cy="20" r="2" fill="none" stroke="#888" stroke-width="1"/></svg>'
+      />
+      <FactionCard
+        name="Rogue Harvesters"
+        role="Extraction-focused AI competitors. They race you to resource sites and extract for themselves."
+        icon='<svg viewBox="0 0 40 40" class="w-10 h-10"><polygon points="20,8 32,28 8,28" fill="none" stroke="#888" stroke-width="1.5"/><line x1="20" y1="16" x2="20" y2="22" stroke="#888" stroke-width="1.5"/><circle cx="20" cy="25" r="1.5" fill="#888"/></svg>'
+      />
+    </div>
+  </PanelSection>
+
+  <!-- WORLD EVENTS -->
+  <PanelSection variant="panel-alt" cut="top">
+    <div class="text-center reveal">
+      <div class="font-mono text-[10px] text-text-dim tracking-[4px] uppercase mb-3">PERSISTENT</div>
+      <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-4">The World Doesn't Wait</h2>
+      <p class="text-text-muted text-sm leading-relaxed max-w-xl mx-auto">
+        Resource nodes replenish. AI factions roam and defend. Contracts rotate. Corpse drops expire. Event zones pulse on and off. Storm anomalies tear through the map. Whether you're online or not, the warzone keeps moving.
+      </p>
+    </div>
+  </PanelSection>
+
+</BaseLayout>

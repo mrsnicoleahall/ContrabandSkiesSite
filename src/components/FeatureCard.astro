@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  accent?: string;
+}
+
+const { title, description, icon, accent = 'crimson' } = Astro.props;
+
+const accentColor = {
+  crimson: 'border-crimson/30 hover:border-crimson/60',
+  gold: 'border-gold/30 hover:border-gold/60',
+  toxic: 'border-toxic/30 hover:border-toxic/60',
+}[accent] ?? 'border-crimson/30 hover:border-crimson/60';
+---
+
+<div class:list={['group border bg-surface/50 p-6 transition-all duration-300 hover:-translate-y-1', accentColor]}>
+  <div class="text-3xl mb-4" set:html={icon} />
+  <h3 class="font-display text-lg font-bold uppercase tracking-wide mb-2">{title}</h3>
+  <p class="text-text-muted text-sm leading-relaxed">{description}</p>
+</div>

@@ -1,0 +1,25 @@
+---
+const steps = [
+  { label: 'Deploy', icon: '&#9654;', desc: 'Drop into the persistent world' },
+  { label: 'Traverse', icon: '&#9992;', desc: 'Fly fast across the island' },
+  { label: 'Fight', icon: '&#9876;', desc: 'Touch down and engage' },
+  { label: 'Loot', icon: '&#9830;', desc: 'Gather contraband on foot' },
+  { label: 'Extract', icon: '&#10003;', desc: 'Bank it — or lose it all' },
+  { label: 'Recover', icon: '&#8635;', desc: 'Died? Race back to your corpse' },
+];
+---
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+  {steps.map((step, i) => (
+    <div class="text-center">
+      <div class:list={[
+        'w-14 h-14 mx-auto mb-3 flex items-center justify-center border rounded-full text-xl',
+        step.label === 'Extract' ? 'border-crimson text-crimson' : 'border-border-subtle text-text-dim'
+      ]}>
+        <span set:html={step.icon} />
+      </div>
+      <div class="font-display text-xs font-bold uppercase tracking-wide mb-1">{step.label}</div>
+      <p class="text-text-dim text-[11px] leading-snug">{step.desc}</p>
+    </div>
+  ))}
+</div>

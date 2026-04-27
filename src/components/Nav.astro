@@ -1,0 +1,97 @@
+---
+const currentPath = Astro.url.pathname;
+const links = [
+  { href: '/game', label: 'GAME' },
+  { href: '/world', label: 'WORLD' },
+  { href: '/media', label: 'MEDIA' },
+  { href: '/faq', label: 'FAQ' },
+];
+---
+
+<nav id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 bg-base/80 backdrop-blur-sm">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="font-display text-lg font-bold tracking-tight uppercase">
+      CONTRABAND <span class="text-crimson">SKIES</span>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-7">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'font-mono text-[10px] tracking-[2px] uppercase transition-colors hover:text-crimson',
+            currentPath === link.href || currentPath === link.href + '/' ? 'text-crimson' : 'text-text-dim',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="#buy"
+        class="font-mono text-[10px] tracking-[2px] uppercase bg-crimson text-white px-4 py-2 hover:bg-crimson/80 transition-colors glow-pulse"
+      >
+        BUY NOW
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="nav-toggle"
+      class="md:hidden w-8 h-8 flex flex-col justify-center items-center gap-1.5"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="nav-bar block w-5 h-px bg-white transition-all duration-300"></span>
+      <span class="nav-bar block w-5 h-px bg-white transition-all duration-300"></span>
+      <span class="nav-bar block w-5 h-px bg-white transition-all duration-300"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div
+    id="mobile-menu"
+    class="md:hidden fixed inset-0 top-16 bg-base/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300"
+  >
+    {links.map(link => (
+      <a
+        href={link.href}
+        class:list={[
+          'font-mono text-sm tracking-[3px] uppercase transition-colors hover:text-crimson',
+          currentPath === link.href || currentPath === link.href + '/' ? 'text-crimson' : 'text-text-muted',
+        ]}
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href="#buy"
+      class="font-mono text-sm tracking-[3px] uppercase bg-crimson text-white px-6 py-3 hover:bg-crimson/80 transition-colors"
+    >
+      BUY NOW
+    </a>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const nav = document.getElementById('site-nav');
+
+  toggle?.addEventListener('click', () => {
+    const wasHidden = menu?.classList.contains('opacity-0');
+    menu?.classList.toggle('opacity-0');
+    menu?.classList.toggle('pointer-events-none');
+    toggle.setAttribute('aria-expanded', wasHidden ? 'true' : 'false');
+  });
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav?.classList.add('bg-base/95', 'border-b', 'border-border');
+      nav?.classList.remove('bg-base/80');
+    } else {
+      nav?.classList.remove('bg-base/95', 'border-b', 'border-border');
+      nav?.classList.add('bg-base/80');
+    }
+  });
+</script>

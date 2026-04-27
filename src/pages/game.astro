@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PanelSection from '../components/PanelSection.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import WeaponCard from '../components/WeaponCard.astro';
+import CraftingTier from '../components/CraftingTier.astro';
+---
+
+<BaseLayout title="Game — Contraband Skies" description="Flight, combat, extraction, crafting, and insurance — every system in Contraband Skies explained.">
+
+  <!-- Page header -->
+  <section class="pt-28 pb-16 px-6 bg-base noise-overlay">
+    <div class="max-w-7xl mx-auto text-center">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">SYSTEMS</div>
+      <h1 class="font-display text-4xl sm:text-6xl font-black uppercase tracking-tight">The Game</h1>
+      <p class="text-text-muted mt-4 max-w-lg mx-auto text-sm">Every system. Every risk. Every reward.</p>
+    </div>
+  </section>
+
+  <!-- FLIGHT -->
+  <PanelSection variant="panel-alt" cut="top">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div class="reveal">
+        <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">TRAVERSAL</div>
+        <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-4">Flight System</h2>
+        <p class="text-text-muted text-sm leading-relaxed mb-6">
+          High-speed omnidirectional flight rigs are your primary way across the map. But the sky is not safe — grounded enemies can shoot you down. Flight is about repositioning, not domination.
+        </p>
+        <div class="border border-crimson/20 bg-surface/30 p-4">
+          <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase mb-2">ENERGY SYSTEM</div>
+          <p class="text-text-muted text-xs leading-relaxed">
+            Boosting drains energy. Normal flight regenerates it. Diving improves efficiency. Exhaustion weakens pursuit without making you helpless.
+          </p>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3 reveal">
+        <FeatureCard title="Cruise" description="Baseline directional flight" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M6 16h20M22 12l4 4-4 4" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
+        <FeatureCard title="Boost" description="High-speed energy burst" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M8 16h16M20 10l6 6-6 6M4 12l4 4-4 4" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
+        <FeatureCard title="Climb" description="Vertical gain for escape" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M16 26V6M12 10l4-4 4 4" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
+        <FeatureCard title="Dive" description="Rapid forced descent" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M16 6v20M12 22l4 4 4-4" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
+        <FeatureCard title="Brake" description="Responsive deceleration" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><rect x="10" y="10" width="12" height="12" rx="2" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
+        <FeatureCard title="Touchdown" description="Return to ground" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M16 6v16M10 18l6 6 6-6M6 26h20" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
+      </div>
+    </div>
+  </PanelSection>
+
+  <!-- COMBAT -->
+  <PanelSection variant="panel" cut="both">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">GUNPLAY</div>
+      <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-2">Combat</h2>
+      <p class="text-text-muted text-sm leading-relaxed mb-4 max-w-2xl">
+        Third-person, over-the-shoulder. Shields plus health. Mid-range engagements dominate. Positioning, cover, and sightline control are as important as raw DPS. Players in the air are vulnerable — flight is not fire superiority.
+      </p>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8 reveal">
+      <WeaponCard name="Pulse Carbines" role="Versatile mid-range workhorse. Reliable damage, balanced handling." icon='<svg viewBox="0 0 40 20" class="w-full h-8"><rect x="4" y="7" width="28" height="6" rx="1" fill="none" stroke="#888" stroke-width="1"/><rect x="10" y="5" width="3" height="10" rx="1" fill="none" stroke="#888" stroke-width="1"/></svg>' />
+      <WeaponCard name="Rail Rifles" role="Long-range precision. High damage per shot, slow follow-up." icon='<svg viewBox="0 0 40 20" class="w-full h-8"><rect x="2" y="8" width="36" height="4" rx="1" fill="none" stroke="#888" stroke-width="1"/><circle cx="36" cy="10" r="3" fill="none" stroke="#888" stroke-width="1"/></svg>' />
+      <WeaponCard name="Shotguns" role="Devastating up close. Forces aggressive positioning plays." icon='<svg viewBox="0 0 40 20" class="w-full h-8"><rect x="4" y="7" width="24" height="6" rx="1" fill="none" stroke="#888" stroke-width="1"/><rect x="28" y="5" width="8" height="10" rx="2" fill="none" stroke="#888" stroke-width="1"/></svg>' />
+      <WeaponCard name="SMGs" role="High rate of fire, short-to-mid pressure. Punishes hesitation." icon='<svg viewBox="0 0 40 20" class="w-full h-8"><rect x="6" y="7" width="20" height="6" rx="1" fill="none" stroke="#888" stroke-width="1"/><rect x="12" y="5" width="3" height="10" rx="1" fill="none" stroke="#888" stroke-width="1"/><rect x="14" y="13" width="6" height="5" rx="1" fill="none" stroke="#888" stroke-width="1"/></svg>' />
+    </div>
+    <p class="font-mono text-[9px] text-text-faint tracking-[2px] uppercase mt-6 text-center reveal">
+      EXPANDING POST-LAUNCH: STATUS WEAPONS &bull; SHIELD BREAKERS &bull; UTILITY LAUNCHERS
+    </p>
+  </PanelSection>
+
+  <!-- EXTRACTION -->
+  <PanelSection variant="panel-alt" cut="both">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">HIGH STAKES</div>
+      <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-4">Extraction</h2>
+      <p class="text-text-muted text-sm leading-relaxed mb-8 max-w-2xl">
+        Nothing enters your permanent stash until you extract it. Extraction happens at zones, pads, or called uplinks — it takes time, it's visible, it's noisy, and it can be contested.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+      <div class="border border-crimson/30 bg-surface/30 p-6">
+        <h3 class="font-display text-sm font-bold uppercase tracking-wide text-crimson mb-3">Active Run Inventory</h3>
+        <ul class="text-text-muted text-sm space-y-2">
+          <li>&bull; Holds current-session loot</li>
+          <li>&bull; Lost on death unless recovered from corpse</li>
+          <li>&bull; Loot must be physically collected while grounded</li>
+          <li class="text-crimson font-bold">&bull; At risk until extraction</li>
+        </ul>
+      </div>
+      <div class="border border-border-subtle bg-surface/30 p-6">
+        <h3 class="font-display text-sm font-bold uppercase tracking-wide mb-3">Permanent Stash</h3>
+        <ul class="text-text-muted text-sm space-y-2">
+          <li>&bull; Stores extracted loot and currencies</li>
+          <li>&bull; Stores crafting materials and recipes</li>
+          <li>&bull; Stores bio-bound weapons</li>
+          <li class="text-text-dim">&bull; Safe between runs</li>
+        </ul>
+      </div>
+    </div>
+  </PanelSection>
+
+  <!-- CRAFTING -->
+  <PanelSection variant="panel" cut="both">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">LONG-TERM MASTERY</div>
+      <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-4">Crafting</h2>
+      <p class="text-text-muted text-sm leading-relaxed mb-8 max-w-2xl">
+        You're not just finding guns. You're slowly assembling personally attuned weapons through rare materials, research, and fabrication. Crafted weapons are bio-bound — permanently yours, impossible to steal.
+      </p>
+    </div>
+
+    <!-- Crafting pipeline -->
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-10 reveal">
+      {[
+        { label: 'Material\nAcquisition', num: 1 },
+        { label: 'Research\nUnlocks', num: 2 },
+        { label: 'Fabrication', num: 3 },
+        { label: 'Bio-\nBinding', num: 4 },
+        { label: 'Insurance\nAttunement', num: 5 },
+      ].map(step => (
+        <div class="text-center">
+          <div class:list={[
+            'w-12 h-12 mx-auto mb-2 flex items-center justify-center border rounded text-sm font-bold font-display',
+            step.num === 4 ? 'border-crimson text-crimson' : 'border-border-subtle text-text-dim'
+          ]}>
+            {step.num}
+          </div>
+          <div class="font-mono text-[9px] text-text-muted tracking-[1px] uppercase whitespace-pre-line">{step.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Weapon tiers -->
+    <div class="reveal">
+      <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase mb-4">WEAPON TIERS</div>
+      <div class="space-y-4">
+        <CraftingTier tier={1} totalTiers={4} name="Fieldmade" description="Early crafted weapons. Low prestige, immediately useful. Your first taste of building." />
+        <CraftingTier tier={2} totalTiers={4} name="Specialized" description="Mid-tier role-defining weapons. Built for specific playstyles and combat roles." />
+        <CraftingTier tier={3} totalTiers={4} name="Signature" description="Long-grind build-around weapons. The centerpiece of a loadout." />
+        <CraftingTier tier={4} totalTiers={4} name="Legacy" description="Very rare prestige projects. Major time investment. The weapons people remember." />
+      </div>
+    </div>
+  </PanelSection>
+
+  <!-- INSURANCE -->
+  <PanelSection variant="panel-alt" cut="both">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">PROTECTION</div>
+      <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-4">Insurance</h2>
+      <p class="text-text-muted text-sm leading-relaxed mb-8 max-w-2xl">
+        Insurance is not a cash shop convenience. It's a long-term progression goal earned through faction reputation, rare tokens, and repeated successful extractions.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
+      <div class="border border-border-subtle bg-surface/30 p-6">
+        <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase mb-2">TIER 1</div>
+        <h3 class="font-display text-lg font-bold uppercase mb-2">Partial Attunement</h3>
+        <p class="text-text-muted text-sm">Faster recovery after loss. Reduced restoration cost. The first step toward protection.</p>
+      </div>
+      <div class="border border-crimson/30 bg-surface/30 p-6">
+        <div class="font-mono text-[9px] text-crimson tracking-[2px] uppercase mb-2">TIER 2</div>
+        <h3 class="font-display text-lg font-bold uppercase mb-2">Core Preservation</h3>
+        <p class="text-text-muted text-sm">Weapon returns automatically after death with a meaningful timer. Attached mods may still be lost.</p>
+      </div>
+      <div class="border border-border-subtle bg-surface/30 p-6">
+        <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase mb-2">TIER 3</div>
+        <h3 class="font-display text-lg font-bold uppercase mb-2">Legacy Policy</h3>
+        <p class="text-text-muted text-sm">Highest-tier protection. Only for top-end long-grind builds. Takes a very long time to earn.</p>
+      </div>
+    </div>
+  </PanelSection>
+
+  <!-- DEATH & RECOVERY -->
+  <PanelSection variant="panel" cut="top">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">CONSEQUENCES</div>
+      <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-4">Death &amp; Recovery</h2>
+      <p class="text-text-muted text-sm leading-relaxed mb-8 max-w-2xl">
+        Death is not the end — it's a race. Your corpse creates a beacon in the live world. Redeploy, get there first, and recover your gear. Or don't, and face the cost.
+      </p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+      {[
+        { label: 'Death', desc: 'All non-protected items drop at your corpse' },
+        { label: 'Beacon', desc: 'Corpse creates a recoverable beacon in the live world' },
+        { label: 'Redeploy', desc: 'Re-enter the same world and race to your drop' },
+        { label: 'Recover', desc: 'Get there first — or others loot it' },
+      ].map(step => (
+        <div class="text-center border border-border-subtle bg-surface/30 p-4">
+          <div class="font-display text-sm font-bold uppercase tracking-wide mb-2">{step.label}</div>
+          <p class="text-text-dim text-xs leading-snug">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+    <p class="text-center font-display text-sm italic text-text-muted mt-8 reveal">
+      "Desperation when racing back to a corpse."
+    </p>
+  </PanelSection>
+
+</BaseLayout>

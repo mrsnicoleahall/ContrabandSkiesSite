@@ -1,0 +1,31 @@
+---
+interface Props {
+  variant?: 'panel' | 'panel-alt' | 'base';
+  cut?: 'top' | 'bottom' | 'both' | 'none';
+  class?: string;
+}
+
+const { variant = 'panel', cut = 'both', class: className = '' } = Astro.props;
+
+const bgColor = {
+  panel: 'bg-panel',
+  'panel-alt': 'bg-panel-alt',
+  base: 'bg-base',
+}[variant];
+
+const clipPath = {
+  top: 'polygon(0 4%, 100% 0, 100% 100%, 0 100%)',
+  bottom: 'polygon(0 0, 100% 0, 100% 96%, 0 100%)',
+  both: 'polygon(0 4%, 100% 0, 100% 96%, 0 100%)',
+  none: 'none',
+}[cut];
+---
+
+<section
+  class:list={['relative py-24 px-6 noise-overlay', bgColor, className]}
+  style={clipPath !== 'none' ? `clip-path: ${clipPath}; margin-top: -2rem; padding-top: 4rem; margin-bottom: -2rem; padding-bottom: 4rem;` : undefined}
+>
+  <div class="max-w-7xl mx-auto reveal">
+    <slot />
+  </div>
+</section>

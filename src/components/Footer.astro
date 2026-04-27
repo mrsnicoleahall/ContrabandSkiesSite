@@ -1,0 +1,33 @@
+---
+const socialSlots = ['Discord', 'X', 'YouTube', 'Reddit'];
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-crimson/30 bg-panel">
+  <!-- Noise overlay -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.04]">
+    <svg width="100%" height="100%"><filter id="footerNoise"><feTurbulence baseFrequency="0.65" numOctaves="3" seed="9"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#footerNoise)"/></svg>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 py-16">
+    <!-- Social link placeholders -->
+    <div class="flex flex-wrap justify-center gap-4 mb-10">
+      {socialSlots.map(name => (
+        <div class="flex items-center gap-2 px-4 py-2 border border-border-subtle text-text-faint font-mono text-[9px] tracking-[2px] uppercase">
+          {name}
+          <span class="text-text-dim">// SOON</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="text-center">
+      <div class="font-display text-sm font-bold tracking-tight uppercase mb-2">
+        CONTRABAND <span class="text-crimson">SKIES</span>
+      </div>
+      <p class="font-mono text-[9px] text-text-faint tracking-[2px]">
+        &copy; {year} CONTRABAND SKIES. ALL RIGHTS RESERVED.
+      </p>
+    </div>
+  </div>
+</footer>

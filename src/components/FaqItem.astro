@@ -1,0 +1,40 @@
+---
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+const id = question.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+---
+
+<div class="border-b border-border">
+  <button
+    class="faq-toggle w-full flex items-center justify-between py-5 text-left group cursor-pointer"
+    aria-expanded="false"
+    aria-controls={`faq-${id}`}
+  >
+    <span class="font-display text-base font-bold pr-4">{question}</span>
+    <svg class="w-4 h-4 text-crimson shrink-0 transition-transform duration-300 group-aria-expanded:rotate-180" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 6l4 4 4-4"/>
+    </svg>
+  </button>
+  <div id={`faq-${id}`} class="faq-content overflow-hidden max-h-0 transition-all duration-300">
+    <p class="text-text-muted text-sm leading-relaxed pb-5">{answer}</p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      const content = btn.nextElementSibling as HTMLElement;
+      if (expanded) {
+        content.style.maxHeight = '0';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+</script>

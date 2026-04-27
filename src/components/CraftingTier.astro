@@ -1,0 +1,21 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  tier: number;
+  totalTiers: number;
+}
+
+const { name, description, tier, totalTiers } = Astro.props;
+const fillPercent = (tier / totalTiers) * 100;
+---
+
+<div class="flex items-start gap-4">
+  <div class="w-1 h-16 bg-border-subtle rounded-full overflow-hidden shrink-0">
+    <div class="w-full bg-crimson rounded-full" style={`height: ${fillPercent}%`}></div>
+  </div>
+  <div>
+    <h4 class="font-display text-sm font-bold uppercase tracking-wide">{name}</h4>
+    <p class="text-text-muted text-xs leading-relaxed mt-1">{description}</p>
+  </div>
+</div>

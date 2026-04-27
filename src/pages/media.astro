@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PanelSection from '../components/PanelSection.astro';
+import MediaPlaceholder from '../components/MediaPlaceholder.astro';
+---
+
+<BaseLayout title="Media — Contraband Skies" description="Screenshots, trailers, and concept art from Contraband Skies.">
+
+  <!-- Page header -->
+  <section class="pt-28 pb-16 px-6 bg-base noise-overlay">
+    <div class="max-w-7xl mx-auto text-center">
+      <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">INTELLIGENCE</div>
+      <h1 class="font-display text-4xl sm:text-6xl font-black uppercase tracking-tight">Media</h1>
+      <p class="text-text-muted mt-4 max-w-lg mx-auto text-sm">Classified assets. Clearance pending.</p>
+    </div>
+  </section>
+
+  <!-- TRAILER -->
+  <PanelSection variant="panel-alt" cut="top">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-text-dim tracking-[4px] uppercase mb-6">FOOTAGE</div>
+      <div class="max-w-4xl mx-auto">
+        <MediaPlaceholder label="CLASSIFIED // FOOTAGE PENDING" aspect="video" />
+      </div>
+    </div>
+  </PanelSection>
+
+  <!-- SCREENSHOTS -->
+  <PanelSection variant="panel" cut="both">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-text-dim tracking-[4px] uppercase mb-6">FIELD CAPTURES</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <MediaPlaceholder label="INTEL REDACTED" aspect="screenshot" />
+        <MediaPlaceholder label="INTEL REDACTED" aspect="screenshot" />
+        <MediaPlaceholder label="INTEL REDACTED" aspect="screenshot" />
+        <MediaPlaceholder label="INTEL REDACTED" aspect="screenshot" />
+        <MediaPlaceholder label="INTEL REDACTED" aspect="screenshot" />
+        <MediaPlaceholder label="INTEL REDACTED" aspect="screenshot" />
+      </div>
+    </div>
+  </PanelSection>
+
+  <!-- CONCEPT ART -->
+  <PanelSection variant="panel-alt" cut="both">
+    <div class="reveal">
+      <div class="font-mono text-[10px] text-text-dim tracking-[4px] uppercase mb-6">RECONNAISSANCE SKETCHES</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <MediaPlaceholder label="ASSET CLASSIFIED" aspect="art" />
+        <MediaPlaceholder label="ASSET CLASSIFIED" aspect="art" />
+        <MediaPlaceholder label="ASSET CLASSIFIED" aspect="art" />
+        <MediaPlaceholder label="ASSET CLASSIFIED" aspect="art" />
+      </div>
+    </div>
+  </PanelSection>
+
+  <!-- PRESS KIT -->
+  <PanelSection variant="panel" cut="top">
+    <div class="text-center reveal">
+      <div class="border border-border-subtle bg-surface/30 inline-block px-10 py-8">
+        <svg viewBox="0 0 32 32" class="w-8 h-8 mx-auto mb-3">
+          <rect x="6" y="4" width="20" height="24" rx="2" fill="none" stroke="#666" stroke-width="1.5"/>
+          <line x1="10" y1="12" x2="22" y2="12" stroke="#666" stroke-width="1"/>
+          <line x1="10" y1="16" x2="22" y2="16" stroke="#666" stroke-width="1"/>
+          <line x1="10" y1="20" x2="18" y2="20" stroke="#666" stroke-width="1"/>
+        </svg>
+        <div class="font-display text-sm font-bold uppercase tracking-wide mb-1">Press Kit</div>
+        <p class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase">AVAILABLE ON REQUEST</p>
+      </div>
+    </div>
+  </PanelSection>
+
+</BaseLayout>
