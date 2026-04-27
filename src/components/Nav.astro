@@ -3,6 +3,7 @@ const currentPath = Astro.url.pathname;
 const links = [
   { href: '/game', label: 'GAME' },
   { href: '/world', label: 'WORLD' },
+  { href: '/lore', label: 'LORE' },
   { href: '/media', label: 'MEDIA' },
   { href: '/faq', label: 'FAQ' },
 ];
@@ -38,60 +39,98 @@ const links = [
     <!-- Mobile hamburger -->
     <button
       id="nav-toggle"
-      class="md:hidden w-8 h-8 flex flex-col justify-center items-center gap-1.5"
+      class="md:hidden relative w-10 h-10 flex flex-col justify-center items-center gap-1.5 z-[60]"
       aria-label="Toggle menu"
       aria-expanded="false"
     >
-      <span class="nav-bar block w-5 h-px bg-white transition-all duration-300"></span>
-      <span class="nav-bar block w-5 h-px bg-white transition-all duration-300"></span>
-      <span class="nav-bar block w-5 h-px bg-white transition-all duration-300"></span>
+      <span id="bar1" class="block w-5 h-[2px] bg-white transition-all duration-300 origin-center"></span>
+      <span id="bar2" class="block w-5 h-[2px] bg-white transition-all duration-300"></span>
+      <span id="bar3" class="block w-5 h-[2px] bg-white transition-all duration-300 origin-center"></span>
     </button>
-  </div>
-
-  <!-- Mobile menu overlay -->
-  <div
-    id="mobile-menu"
-    class="md:hidden fixed inset-0 top-16 bg-base/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300"
-  >
-    {links.map(link => (
-      <a
-        href={link.href}
-        class:list={[
-          'font-mono text-sm tracking-[3px] uppercase transition-colors hover:text-crimson',
-          currentPath === link.href || currentPath === link.href + '/' ? 'text-crimson' : 'text-text-muted',
-        ]}
-      >
-        {link.label}
-      </a>
-    ))}
-    <a
-      href="#buy"
-      class="font-mono text-sm tracking-[3px] uppercase bg-crimson text-white px-6 py-3 hover:bg-crimson/80 transition-colors"
-    >
-      BUY NOW
-    </a>
   </div>
 </nav>
 
-<script>
-  const toggle = document.getElementById('nav-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const nav = document.getElementById('site-nav');
+<!-- Mobile menu: outside nav, full-screen overlay -->
+<div
+  id="mobile-menu"
+  class="md:hidden fixed inset-0 z-[55] bg-base/98 backdrop-blur-md flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  {links.map(link => (
+    <a
+      href={link.href}
+      class:list={[
+        'mobile-link font-mono text-lg tracking-[4px] uppercase transition-colors hover:text-crimson',
+        currentPath === link.href || currentPath === link.href + '/' ? 'text-crimson' : 'text-text-muted',
+      ]}
+    >
+      {link.label}
+    </a>
+  ))}
+  <a
+    href="#buy"
+    class="mobile-link font-mono text-lg tracking-[4px] uppercase bg-crimson text-white px-8 py-4 hover:bg-crimson/80 transition-colors mt-4"
+  >
+    BUY NOW
+  </a>
+</div>
 
-  toggle?.addEventListener('click', () => {
-    const wasHidden = menu?.classList.contains('opacity-0');
-    menu?.classList.toggle('opacity-0');
-    menu?.classList.toggle('pointer-events-none');
-    toggle.setAttribute('aria-expanded', wasHidden ? 'true' : 'false');
-  });
+<script is:inline>
+  (function() {
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const nav = document.getElementById('site-nav');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    let isOpen = false;
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      nav?.classList.add('bg-base/95', 'border-b', 'border-border');
-      nav?.classList.remove('bg-base/80');
-    } else {
-      nav?.classList.remove('bg-base/95', 'border-b', 'border-border');
-      nav?.classList.add('bg-base/80');
+    function openMenu() {
+      isOpen = true;
+      menu.classList.remove('opacity-0', 'pointer-events-none');
+      menu.classList.add('opacity-100');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      // Animate to X
+      bar1.style.transform = 'rotate(45deg) translateY(5px)';
+      bar2.style.opacity = '0';
+      bar3.style.transform = 'rotate(-45deg) translateY(-5px)';
     }
-  });
+
+    function closeMenu() {
+      isOpen = false;
+      menu.classList.add('opacity-0', 'pointer-events-none');
+      menu.classList.remove('opacity-100');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      // Animate back to hamburger
+      bar1.style.transform = '';
+      bar2.style.opacity = '1';
+      bar3.style.transform = '';
+    }
+
+    toggle.addEventListener('click', function() {
+      if (isOpen) { closeMenu(); } else { openMenu(); }
+    });
+
+    // Close on link click
+    document.querySelectorAll('.mobile-link').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && isOpen) { closeMenu(); }
+    });
+
+    // Scroll effect on nav
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 40) {
+        nav.classList.add('bg-base/95', 'border-b', 'border-border');
+        nav.classList.remove('bg-base/80');
+      } else {
+        nav.classList.remove('bg-base/95', 'border-b', 'border-border');
+        nav.classList.add('bg-base/80');
+      }
+    }, { passive: true });
+  })();
 </script>

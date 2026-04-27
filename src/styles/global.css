@@ -232,3 +232,45 @@ html {
   animation: count-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
 }
+
+/* =============================================
+   MOBILE PERFORMANCE
+   Kill expensive effects on small screens.
+   Keep reveals and hero entrance — strip the rest.
+   ============================================= */
+@media (max-width: 767px) {
+  /* Disable floating particles and scan line */
+  .particle, .scan-line { display: none; }
+
+  /* Disable parallax — layers just sit static */
+  .parallax-layer { transform: none !important; }
+
+  /* Disable card tilt (no mouse hover on touch anyway) */
+  .card-tilt { transform: none !important; }
+  .card-tilt:hover { transform: none; box-shadow: none; }
+
+  /* Disable shimmer border animation */
+  .shimmer-border::after { animation: none; }
+
+  /* Reduce noise overlay (SVG filters are GPU-heavy on mobile) */
+  .noise-overlay::before { display: none; }
+
+  /* Simplify reveal transitions — shorter, no directional transforms */
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    transform: translateY(16px);
+    transition-duration: 0.4s;
+  }
+  .reveal.revealed, .reveal-left.revealed, .reveal-right.revealed, .reveal-scale.revealed {
+    transform: none;
+  }
+
+  /* Faster stagger on mobile */
+  .stagger-children > *:nth-child(2) { transition-delay: 0.05s; }
+  .stagger-children > *:nth-child(3) { transition-delay: 0.1s; }
+  .stagger-children > *:nth-child(4) { transition-delay: 0.15s; }
+  .stagger-children > *:nth-child(5) { transition-delay: 0.2s; }
+  .stagger-children > *:nth-child(6) { transition-delay: 0.25s; }
+
+  /* Disable glow pulse (box-shadow animation is expensive) */
+  .glow-pulse { animation: none; box-shadow: 0 0 8px rgba(220, 38, 38, 0.3); }
+}
