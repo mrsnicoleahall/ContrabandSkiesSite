@@ -9,12 +9,14 @@ const steps = [
 ];
 ---
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 stagger-children">
   {steps.map((step, i) => (
-    <div class="text-center">
+    <div class="text-center reveal group">
       <div class:list={[
-        'w-14 h-14 mx-auto mb-3 flex items-center justify-center border rounded-full text-xl',
-        step.label === 'Extract' ? 'border-crimson text-crimson' : 'border-border-subtle text-text-dim'
+        'w-14 h-14 mx-auto mb-3 flex items-center justify-center border rounded-full text-xl transition-all duration-500 group-hover:scale-110',
+        step.label === 'Extract'
+          ? 'border-crimson text-crimson group-hover:shadow-lg group-hover:shadow-crimson/20 group-hover:bg-crimson/10'
+          : 'border-border-subtle text-text-dim group-hover:border-text-dim'
       ]}>
         <span set:html={step.icon} />
       </div>

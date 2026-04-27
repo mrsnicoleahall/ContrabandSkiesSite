@@ -20,7 +20,7 @@ import CraftingTier from '../components/CraftingTier.astro';
   <!-- FLIGHT -->
   <PanelSection variant="panel-alt" cut="top">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-      <div class="reveal">
+      <div class="reveal-left">
         <div class="font-mono text-[10px] text-crimson tracking-[4px] uppercase mb-3">TRAVERSAL</div>
         <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-4">Flight System</h2>
         <p class="text-text-muted text-sm leading-relaxed mb-6">
@@ -33,7 +33,7 @@ import CraftingTier from '../components/CraftingTier.astro';
           </p>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-3 reveal">
+      <div class="grid grid-cols-2 gap-3 reveal-right stagger-children">
         <FeatureCard title="Cruise" description="Baseline directional flight" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M6 16h20M22 12l4 4-4 4" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
         <FeatureCard title="Boost" description="High-speed energy burst" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M8 16h16M20 10l6 6-6 6M4 12l4 4-4 4" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
         <FeatureCard title="Climb" description="Vertical gain for escape" icon='<svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M16 26V6M12 10l4-4 4 4" fill="none" stroke="#dc2626" stroke-width="1.5"/></svg>' />
@@ -53,7 +53,7 @@ import CraftingTier from '../components/CraftingTier.astro';
         Third-person, over-the-shoulder. Shields plus health. Mid-range engagements dominate. Positioning, cover, and sightline control are as important as raw DPS. Players in the air are vulnerable — flight is not fire superiority.
       </p>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8 reveal">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8 reveal stagger-children">
       <WeaponCard name="Pulse Carbines" role="Versatile mid-range workhorse. Reliable damage, balanced handling." icon='<svg viewBox="0 0 40 20" class="w-full h-8"><rect x="4" y="7" width="28" height="6" rx="1" fill="none" stroke="#888" stroke-width="1"/><rect x="10" y="5" width="3" height="10" rx="1" fill="none" stroke="#888" stroke-width="1"/></svg>' />
       <WeaponCard name="Rail Rifles" role="Long-range precision. High damage per shot, slow follow-up." icon='<svg viewBox="0 0 40 20" class="w-full h-8"><rect x="2" y="8" width="36" height="4" rx="1" fill="none" stroke="#888" stroke-width="1"/><circle cx="36" cy="10" r="3" fill="none" stroke="#888" stroke-width="1"/></svg>' />
       <WeaponCard name="Shotguns" role="Devastating up close. Forces aggressive positioning plays." icon='<svg viewBox="0 0 40 20" class="w-full h-8"><rect x="4" y="7" width="24" height="6" rx="1" fill="none" stroke="#888" stroke-width="1"/><rect x="28" y="5" width="8" height="10" rx="2" fill="none" stroke="#888" stroke-width="1"/></svg>' />
@@ -73,8 +73,8 @@ import CraftingTier from '../components/CraftingTier.astro';
         Nothing enters your permanent stash until you extract it. Extraction happens at zones, pads, or called uplinks — it takes time, it's visible, it's noisy, and it can be contested.
       </p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
-      <div class="border border-crimson/30 bg-surface/30 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="border border-crimson/30 bg-surface/30 p-6 reveal-left card-tilt">
         <h3 class="font-display text-sm font-bold uppercase tracking-wide text-crimson mb-3">Active Run Inventory</h3>
         <ul class="text-text-muted text-sm space-y-2">
           <li>&bull; Holds current-session loot</li>
@@ -83,7 +83,7 @@ import CraftingTier from '../components/CraftingTier.astro';
           <li class="text-crimson font-bold">&bull; At risk until extraction</li>
         </ul>
       </div>
-      <div class="border border-border-subtle bg-surface/30 p-6">
+      <div class="border border-border-subtle bg-surface/30 p-6 reveal-right card-tilt">
         <h3 class="font-display text-sm font-bold uppercase tracking-wide mb-3">Permanent Stash</h3>
         <ul class="text-text-muted text-sm space-y-2">
           <li>&bull; Stores extracted loot and currencies</li>
@@ -147,18 +147,18 @@ import CraftingTier from '../components/CraftingTier.astro';
         Insurance is not a cash shop convenience. It's a long-term progression goal earned through faction reputation, rare tokens, and repeated successful extractions.
       </p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
-      <div class="border border-border-subtle bg-surface/30 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-children">
+      <div class="border border-border-subtle bg-surface/30 p-6 reveal card-tilt">
         <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase mb-2">TIER 1</div>
         <h3 class="font-display text-lg font-bold uppercase mb-2">Partial Attunement</h3>
         <p class="text-text-muted text-sm">Faster recovery after loss. Reduced restoration cost. The first step toward protection.</p>
       </div>
-      <div class="border border-crimson/30 bg-surface/30 p-6">
+      <div class="border border-crimson/30 bg-surface/30 p-6 reveal card-tilt shimmer-border">
         <div class="font-mono text-[9px] text-crimson tracking-[2px] uppercase mb-2">TIER 2</div>
         <h3 class="font-display text-lg font-bold uppercase mb-2">Core Preservation</h3>
         <p class="text-text-muted text-sm">Weapon returns automatically after death with a meaningful timer. Attached mods may still be lost.</p>
       </div>
-      <div class="border border-border-subtle bg-surface/30 p-6">
+      <div class="border border-border-subtle bg-surface/30 p-6 reveal card-tilt">
         <div class="font-mono text-[9px] text-text-dim tracking-[2px] uppercase mb-2">TIER 3</div>
         <h3 class="font-display text-lg font-bold uppercase mb-2">Legacy Policy</h3>
         <p class="text-text-muted text-sm">Highest-tier protection. Only for top-end long-grind builds. Takes a very long time to earn.</p>

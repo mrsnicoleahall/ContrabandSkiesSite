@@ -19,8 +19,8 @@ import FactionCard from '../components/FactionCard.astro';
   <!-- MAPS -->
   <PanelSection variant="panel-alt" cut="top">
     <div class="font-mono text-[10px] text-text-dim tracking-[4px] uppercase mb-8 reveal">THEATRES OF OPERATION</div>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div class="reveal">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 stagger-children">
+      <div class="reveal card-tilt">
         <MapCard
           name="Urban"
           description="Dense city core. Towers, alleys, elevated rail, neon avenues, plazas, and warehouses. Vertical combat at its most intense — rooftops become both refuge and killing ground."
@@ -30,7 +30,7 @@ import FactionCard from '../components/FactionCard.astro';
           mapArt='<svg viewBox="0 0 200 100" class="w-full h-24"><g fill="none" stroke="#d4a017" stroke-width="0.5" opacity="0.6"><rect x="10" y="30" width="20" height="70"/><rect x="35" y="15" width="30" height="85"/><rect x="70" y="40" width="15" height="60"/><rect x="90" y="10" width="25" height="90"/><rect x="120" y="35" width="20" height="65"/><rect x="145" y="20" width="35" height="80"/><line x1="0" y1="98" x2="200" y2="98"/></g></svg>'
         />
       </div>
-      <div class="reveal">
+      <div class="reveal card-tilt">
         <MapCard
           name="Rural"
           description="Open farmland, ridgelines, creek beds, timber edges, mills, and quarries. Longer sightlines mean more exposure during flight and stronger marksman pressure on the ground."
@@ -40,7 +40,7 @@ import FactionCard from '../components/FactionCard.astro';
           mapArt='<svg viewBox="0 0 200 100" class="w-full h-24"><g fill="none" stroke="#dc2626" stroke-width="0.5" opacity="0.6"><path d="M0,70 Q50,40 100,65 T200,55"/><path d="M0,80 Q60,60 120,75 T200,70"/><line x1="40" y1="45" x2="40" y2="70"/><line x1="42" y1="45" x2="48" y2="55"/><line x1="38" y1="45" x2="32" y2="55"/><line x1="140" y1="55" x2="140" y2="72"/><line x1="142" y1="55" x2="148" y2="63"/><line x1="138" y1="55" x2="132" y2="63"/><line x1="0" y1="98" x2="200" y2="98"/></g></svg>'
         />
       </div>
-      <div class="reveal">
+      <div class="reveal card-tilt">
         <MapCard
           name="Suburbs"
           description="Housing blocks, school zones, strip malls, drainage channels, cul-de-sacs, and backyard routes. Medium sightlines with endless flanking lanes for house-to-house pressure."
@@ -62,7 +62,7 @@ import FactionCard from '../components/FactionCard.astro';
         The world is not empty between players. Five factions control territory, guard resources, and hunt anyone who enters their domain.
       </p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-children">
       <FactionCard
         name="Scav Raiders"
         role="Baseline armed roamers. Camp defenders, convoy escorts, and opportunistic hunters."
